@@ -63,6 +63,16 @@ body {
 
 .download-character-wrapper {
   position: relative;
+  padding-bottom: 3%;
+  padding-left: 3%;
+  align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+  .download-character-wrapper {
+    padding-bottom: 5%;
+    padding-left: 0;
+  }
 }
 
 .download-character-wrapper::before {
@@ -87,10 +97,10 @@ body {
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) scale(1.15) rotate(0deg);
+    transform: translateY(0px) translateX(0px) scale(1.15) rotate(0deg);
   }
   50% {
-    transform: translateY(-25px) scale(1.15) rotate(1deg);
+    transform: translateY(-20px) translateX(5px) scale(1.15) rotate(1deg);
   }
 }
 

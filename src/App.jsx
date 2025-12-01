@@ -391,17 +391,19 @@ const DownloadSection = forwardRef((props, sectionRef) => {
       </div>
 
       <div className="relative z-10 w-full h-full flex items-center justify-center">
-        <div className="container mx-auto px-10 flex items-center justify-between w-full h-full">
-          <div className="download-character-wrapper relative w-[55%] h-full flex items-center justify-center overflow-visible">
+        <div className="container mx-auto px-6 md:px-10 flex items-end justify-between w-full h-full gap-4">
+          <div className="download-character-wrapper relative w-[55%] h-full flex items-end justify-start overflow-visible pl-4">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-transparent rounded-full blur-3xl scale-150 z-0"></div>
             <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-orange-500/10 to-transparent rounded-full blur-2xl scale-125 z-0"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 via-transparent to-pink-900/30 z-0"></div>
             <img
-              className="download-character relative z-10 w-full h-[95vh] object-contain"
+              className="download-character relative z-10 w-auto h-[85vh] max-h-[85vh] object-contain object-left-bottom"
               src="./download.png"
               alt="Character"
               style={{
                 filter: "drop-shadow(0 40px 80px rgba(255, 105, 180, 0.6)) drop-shadow(0 0 100px rgba(255, 192, 203, 0.4)) brightness(1.05) contrast(1.1) saturate(1.1)",
+                maxWidth: "100%",
+                objectPosition: "left bottom",
               }}
               onError={(e) => {
                 e.target.src = "./imag.png";
@@ -410,8 +412,8 @@ const DownloadSection = forwardRef((props, sectionRef) => {
             />
           </div>
 
-          <div className="download-content w-[45%] px-10">
-            <div className="download-text glass-effect rounded-3xl p-12 max-w-2xl">
+          <div className="download-content w-[45%] px-10 flex items-center justify-center h-full">
+            <div className="download-text glass-effect rounded-3xl p-12 max-w-2xl w-full">
               <h2 className="text-6xl font-bold text-white mb-6 text-glow">
                 Ready for Action?
               </h2>
