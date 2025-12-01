@@ -58,13 +58,16 @@ function App() {
     });
 
     gsap.to(".character", {
-      scale: 1.4,
+      scale: 1.0,
       x: "-50%",
-      bottom: "-25%",
+      y: "-50%",
+      bottom: "auto",
+      top: "50%",
       rotate: 0,
       duration: 2,
       delay: "-.8",
       ease: "Expo.easeInOut",
+      transformOrigin: "center center",
     });
 
     gsap.to(".text", {
@@ -79,6 +82,7 @@ function App() {
 
     main?.addEventListener("mousemove", function (e) {
       const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+      const yMove = (e.clientY / window.innerHeight - 0.5) * 20;
       gsap.to(".main .text", {
         x: `${xMove * 0.4}%`,
       });
@@ -87,6 +91,12 @@ function App() {
       });
       gsap.to(".bg", {
         x: xMove * 1.7,
+      });
+      gsap.to(".character", {
+        x: `calc(-50% + ${xMove * 0.25}px)`,
+        y: `calc(-50% + ${yMove * 0.3}px)`,
+        duration: 0.5,
+        ease: "Power2.easeOut",
       });
     });
   }, [showContent]);
@@ -155,9 +165,10 @@ function App() {
                 <h1 className="text-[12rem] leading-none -ml-40">auto</h1>
               </div>
               <img
-                className="absolute character -bottom-[150%] left-1/2 -translate-x-1/2  scale-[3] rotate-[-20deg]"
+                className="absolute character -bottom-[150%] left-1/2 -translate-x-1/2 scale-[1.8] rotate-[-20deg] object-contain max-h-[75vh] w-auto z-[5] pointer-events-none"
                 src="./girlbg.png"
-                alt=""
+                alt="Character"
+                style={{ filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.6))' }}
               />
             </div>
             <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent">
