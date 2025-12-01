@@ -1,0 +1,30 @@
+<svg width="400" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
+    </linearGradient>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Decorative lines on left -->
+  <rect x="0" y="30" width="30" height="4" rx="2" fill="#FFD700"/>
+  <rect x="0" y="42" width="20" height="4" rx="2" fill="#FFD700"/>
+  <rect x="0" y="54" width="12" height="4" rx="2" fill="#FFD700"/>
+  
+  <!-- Rockstar text -->
+  <text x="50" y="68" font-family="Arial, sans-serif" font-size="48" font-weight="bold" 
+        fill="url(#textGradient)" filter="url(#textGlow)">Rockstar</text>
+  
+  <!-- Decorative lines on right -->
+  <rect x="340" y="30" width="30" height="4" rx="2" fill="#FFD700"/>
+  <rect x="350" y="42" width="20" height="4" rx="2" fill="#FFD700"/>
+  <rect x="360" y="54" width="12" height="4" rx="2" fill="#FFD700"/>
+</svg>
+

@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6347;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient)" stroke="#FFD700" stroke-width="4"/>
+  
+  <!-- Roman numeral VI -->
+  <text x="256" y="320" font-family="Arial Black, sans-serif" font-size="280" font-weight="900" 
+        text-anchor="middle" fill="url(#logoGradient)" filter="url(#glow)">VI</text>
+  
+  <!-- Decorative lines -->
+  <rect x="120" y="180" width="60" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+  <rect x="120" y="200" width="40" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+  <rect x="120" y="220" width="25" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+  
+  <rect x="332" y="180" width="60" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+  <rect x="352" y="200" width="40" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+  <rect x="367" y="220" width="25" height="8" rx="4" fill="#FFD700" opacity="0.8"/>
+</svg>
+

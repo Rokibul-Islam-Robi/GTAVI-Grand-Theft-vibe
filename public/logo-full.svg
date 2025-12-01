@@ -1,0 +1,40 @@
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fullGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6347;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fullTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
+    </linearGradient>
+    <filter id="fullGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Left decorative lines -->
+  <rect x="20" y="60" width="40" height="5" rx="2.5" fill="#FFD700"/>
+  <rect x="20" y="75" width="26" height="5" rx="2.5" fill="#FFD700"/>
+  <rect x="20" y="90" width="16" height="5" rx="2.5" fill="#FFD700"/>
+  
+  <!-- Logo icon circle -->
+  <circle cx="110" cy="100" r="45" fill="none" stroke="url(#fullGradient)" stroke-width="4"/>
+  <text x="110" y="125" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" 
+        text-anchor="middle" fill="url(#fullGradient)">VI</text>
+  
+  <!-- Rockstar text -->
+  <text x="180" y="125" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+        fill="url(#fullTextGradient)" filter="url(#fullGlow)">Rockstar</text>
+  
+  <!-- Right decorative lines -->
+  <rect x="500" y="60" width="40" height="5" rx="2.5" fill="#FFD700"/>
+  <rect x="514" y="75" width="26" height="5" rx="2.5" fill="#FFD700"/>
+  <rect x="524" y="90" width="16" height="5" rx="2.5" fill="#FFD700"/>
+</svg>
+
