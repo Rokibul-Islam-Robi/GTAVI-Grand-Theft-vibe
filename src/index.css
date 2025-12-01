@@ -5,9 +5,102 @@
   src: url("./pricedown.otf");
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   font-family: "pricedown";
+  overflow-x: hidden;
+}
+
+/* Glass morphism effects */
+.glass-effect {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+    0 0 80px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    0 0 100px rgba(255, 255, 255, 0.08);
+}
+
+/* Text glow effect for headings */
+.text-glow {
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Modern download character effects */
+.download-character {
+  animation: float 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.download-character:hover {
+  filter: drop-shadow(0 50px 100px rgba(255, 105, 180, 0.8)) 
+          drop-shadow(0 0 150px rgba(255, 192, 203, 0.6)) !important;
+}
+
+.download-character-wrapper {
+  position: relative;
+}
+
+.download-character-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-glow 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+.download-character-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  background: radial-gradient(circle, rgba(255, 192, 203, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-glow 4s ease-in-out infinite 0.5s;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1.15) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) scale(1.15) rotate(1deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }

@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useRef, forwardRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 
 function App() {
   let [showContent, setShowContent] = useState(false);
+  const contentSectionRef = useRef(null);
+  const downloadSectionRef = useRef(null);
+
+  const scrollToContent = () => {
+    if (contentSectionRef.current) {
+      const offset = contentSectionRef.current.offsetTop;
+      window.scrollTo({
+        top: offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollToDownload = () => {
+    if (downloadSectionRef.current) {
+      const offset = downloadSectionRef.current.offsetTop;
+      window.scrollTo({
+        top: offset,
+        behavior: "smooth",
+      });
+    }
+  };
   useGSAP(() => {
     const tl = gsap.timeline();
 
@@ -79,8 +101,9 @@ function App() {
     });
 
     const main = document.querySelector(".main");
+    if (!main) return;
 
-    main?.addEventListener("mousemove", function (e) {
+    const handleMouseMove = (e) => {
       const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
       const yMove = (e.clientY / window.innerHeight - 0.5) * 20;
       gsap.to(".main .text", {
@@ -98,7 +121,13 @@ function App() {
         duration: 0.5,
         ease: "Power2.easeOut",
       });
-    });
+    };
+
+    main.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      main.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [showContent]);
 
   return (
@@ -171,13 +200,16 @@ function App() {
                 style={{ filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.6))' }}
               />
             </div>
-            <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent">
-              <div className="flex gap-4 items-center">
-                <i className="text-4xl ri-arrow-down-line"></i>
+            <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent z-20">
+              <button
+                onClick={scrollToContent}
+                className="flex gap-4 items-center cursor-pointer hover:opacity-80 transition-opacity duration-300 group"
+              >
+                <i className="text-4xl ri-arrow-down-line group-hover:translate-y-2 transition-transform duration-300"></i>
                 <h3 className="text-xl font-[Helvetica_Now_Display]">
                   Scroll Down
                 </h3>
-              </div>
+              </button>
               <img
                 className="absolute h-[55px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 src="./ps5.png"
@@ -185,7 +217,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="w-full h-screen flex items-center justify-center bg-black">
+          <div ref={contentSectionRef} className="w-full h-screen flex items-center justify-center bg-black">
             <div className="cntnr flex text-white w-full h-[80%] ">
               <div className="limg relative w-1/2 h-full">
                 <img
@@ -194,39 +226,230 @@ function App() {
                   alt=""
                 />
               </div>
-              <div className="rg w-[30%] py-30">
-                <h1 className="text-8xl">Still Running,</h1>
-                <h1 className="text-8xl">Not Hunting</h1>
-                <p className="mt-10 text-xl font-[Helvetica_Now_Display]">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Distinctio possimus, asperiores nam, omnis inventore nesciunt
-                  a architecto eveniet saepe, ducimus necessitatibus at
-                  voluptate.
+              <div className="rg relative w-[30%] py-30 px-8 rounded-2xl glass-effect overflow-hidden flex flex-col items-center justify-center">
+                <h1 className="text-8xl drop-shadow-2xl font-bold text-glow text-center">Still Running,</h1>
+                <h1 className="text-8xl drop-shadow-2xl font-bold text-glow text-center">Not Hunting</h1>
+                <p className="mt-10 text-xl font-[Helvetica_Now_Display] leading-relaxed text-white/90 text-center">
+                  Welcome to Vice City, where every street tells a story and every corner hides an opportunity. Experience the ultimate open-world adventure as you navigate through a sprawling metropolis filled with endless possibilities, from high-speed chases to strategic heists.
                 </p>
-                <p className="mt-3 text-xl font-[Helvetica_Now_Display]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                  eius illum fugit eligendi nesciunt quia similique velit
-                  excepturi soluta tenetur illo repellat consectetur laborum
-                  eveniet eaque, dicta, hic quisquam? Ex cupiditate ipsa nostrum
-                  autem sapiente.
+                <p className="mt-3 text-xl font-[Helvetica_Now_Display] leading-relaxed text-white/90 text-center">
+                  Build your criminal empire from the ground up. Recruit crew members, complete daring missions, and rise through the ranks. The city is your playground—take what you want, when you want. Just remember: in this game, there are no second chances.
                 </p>
-                <p className="mt-10 text-xl font-[Helvetica_Now_Display]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                  eius illum fugit eligendi nesciunt quia similique velit
-                  excepturi soluta tenetur illo repellat consectetur laborum
-                  eveniet eaque, dicta, hic quisquam? Ex cupiditate ipsa nostrum
-                  autem sapiente.
+                <p className="mt-10 text-xl font-[Helvetica_Now_Display] leading-relaxed text-white/90 text-center">
+                  With cutting-edge graphics, immersive gameplay, and a dynamic world that reacts to your every move, Grand Theft Auto VI redefines what's possible in open-world gaming. Are you ready to write your legend?
                 </p>
-                <button className="bg-yellow-500 px-10 py-10 text-black mt-10 text-4xl">
+                <button
+                  onClick={scrollToDownload}
+                  className="bg-yellow-500 hover:bg-yellow-400 transition-all duration-300 px-10 py-10 text-black mt-10 text-4xl rounded-lg shadow-xl hover:shadow-2xl hover:scale-105 font-bold mx-auto"
+                >
                   Download Now
                 </button>
               </div>
             </div>
           </div>
+          <DownloadSection ref={downloadSectionRef} />
         </div>
       )}
     </>
   );
 }
+
+const DownloadSection = forwardRef((props, sectionRef) => {
+  useGSAP(() => {
+    if (!sectionRef?.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const character = entry.target.querySelector(".download-character");
+            const text = entry.target.querySelector(".download-text");
+            const bg = entry.target.querySelector(".download-bg");
+
+            if (character) {
+              gsap.fromTo(
+                character,
+                {
+                  scale: 1.8,
+                  rotate: -20,
+                  opacity: 0,
+                  y: 150,
+                  filter: "blur(10px)",
+                },
+                {
+                  scale: 1.15,
+                  rotate: 0,
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  duration: 2,
+                  ease: "Expo.easeOut",
+                }
+              );
+            }
+
+            if (text) {
+              gsap.fromTo(
+                text,
+                {
+                  opacity: 0,
+                  y: 50,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 1.2,
+                  delay: 0.3,
+                  ease: "Power3.easeOut",
+                }
+              );
+            }
+
+            if (bg) {
+              gsap.fromTo(
+                bg,
+                {
+                  scale: 1.3,
+                  opacity: 0,
+                },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  duration: 2,
+                  ease: "Power2.easeOut",
+                }
+              );
+            }
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef?.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  });
+
+  useGSAP(() => {
+    const downloadSection = sectionRef?.current;
+    if (!downloadSection) return;
+
+    const handleMouseMove = (e) => {
+      const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+      const yMove = (e.clientY / window.innerHeight - 0.5) * 30;
+      const character = downloadSection.querySelector(".download-character");
+      const bg = downloadSection.querySelector(".download-bg");
+      const wrapper = downloadSection.querySelector(".download-character-wrapper");
+
+      if (character) {
+        gsap.to(character, {
+          x: `${xMove * 0.3}px`,
+          y: `${yMove * 0.3}px`,
+          scale: 1.15 + (Math.abs(yMove) / 1000),
+          duration: 1,
+          ease: "Power2.easeOut",
+        });
+      }
+
+      if (wrapper) {
+        const glowIntensity = Math.abs(xMove) / 50;
+        gsap.to(wrapper, {
+          filter: `brightness(${1 + glowIntensity * 0.1})`,
+          duration: 0.5,
+        });
+      }
+
+      if (bg) {
+        gsap.to(bg, {
+          x: `${xMove * 0.6}px`,
+          duration: 0.8,
+          ease: "Power2.easeOut",
+        });
+      }
+    };
+
+    downloadSection.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      downloadSection.removeEventListener("mousemove", handleMouseMove);
+    };
+  });
+
+  return (
+    <div
+      ref={sectionRef}
+      className="download-section relative overflow-hidden w-full h-screen bg-gradient-to-b from-black via-purple-900/30 via-pink-900/25 to-orange-900/20"
+    >
+      <div className="absolute inset-0 download-bg opacity-40">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-600/15 via-purple-600/15 via-orange-500/10 to-yellow-500/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-pink-500/5 to-purple-500/10"></div>
+      </div>
+
+      <div className="relative z-10 w-full h-full flex items-center justify-center">
+        <div className="container mx-auto px-10 flex items-center justify-between w-full h-full">
+          <div className="download-character-wrapper relative w-[55%] h-full flex items-center justify-center overflow-visible">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-transparent rounded-full blur-3xl scale-150 z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-orange-500/10 to-transparent rounded-full blur-2xl scale-125 z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 via-transparent to-pink-900/30 z-0"></div>
+            <img
+              className="download-character relative z-10 w-full h-[95vh] object-contain"
+              src="./download.png"
+              alt="Character"
+              style={{
+                filter: "drop-shadow(0 40px 80px rgba(255, 105, 180, 0.6)) drop-shadow(0 0 100px rgba(255, 192, 203, 0.4)) brightness(1.05) contrast(1.1) saturate(1.1)",
+              }}
+              onError={(e) => {
+                e.target.src = "./imag.png";
+                console.warn("Download image not found, using fallback");
+              }}
+            />
+          </div>
+
+          <div className="download-content w-[45%] px-10">
+            <div className="download-text glass-effect rounded-3xl p-12 max-w-2xl">
+              <h2 className="text-6xl font-bold text-white mb-6 text-glow">
+                Ready for Action?
+              </h2>
+              <p className="text-2xl text-white/90 mb-8 leading-relaxed">
+                Step into the most immersive open-world experience ever created.
+                Every mission, every decision, every moment is yours to control.
+              </p>
+              <div className="features mb-10 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span className="text-xl text-white/90">
+                    Massive Open World
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span className="text-xl text-white/90">
+                    Stunning Graphics
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span className="text-xl text-white/90">
+                    Epic Storyline
+                  </span>
+                </div>
+              </div>
+              <button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black px-12 py-6 text-3xl font-bold rounded-xl shadow-2xl hover:shadow-yellow-500/50 hover:scale-110 transition-all duration-300 transform">
+                Get It Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+DownloadSection.displayName = "DownloadSection";
 
 export default App;
